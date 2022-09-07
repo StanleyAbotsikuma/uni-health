@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.trevillon.uni_health">
    <application
-        android:label="uni_health"
+        android:label="Uni-Health"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

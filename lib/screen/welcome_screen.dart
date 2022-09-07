@@ -66,6 +66,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   const Gap(40),
                   TextField(
+                    keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.email),
                         border: OutlineInputBorder(
@@ -73,11 +74,13 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                         filled: true,
                         hintStyle: TextStyle(color: Colors.grey[800]),
-                        hintText: "E mail",
+                        hintText: "E-mail",
                         fillColor: Colors.white70),
                   ),
                   const Gap(10),
                   TextField(
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
                     decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.password),
                         border: OutlineInputBorder(

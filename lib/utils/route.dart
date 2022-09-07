@@ -3,6 +3,7 @@ import 'package:uni_health/screen/complete_registration_screen.dart';
 import 'package:uni_health/screen/registration_screen.dart';
 import 'package:uni_health/screen/welcome_screen.dart';
 
+import '../screen/home_screen.dart';
 import '../screen/second_registration_screen.dart';
 import '../screen/splash_screen.dart';
 
@@ -18,16 +19,13 @@ class GenerateRoute {
       case "/welcome_screen":
         return MaterialPageRoute(builder: (_) => const WelcomeScreen());
       case "/registration_screen":
-        return MaterialPageRoute(builder: (_) => const RegistrationScreen());
+        return MaterialPageRoute(builder: (_) => RegistrationScreen());
       case "/complete_registration_screen":
-        return MaterialPageRoute(
-            builder: (_) => const CompleteRegistrationScreen());
+        return MaterialPageRoute(builder: (_) => CompleteRegistrationScreen());
       case "/second_registration_screen":
-        return MaterialPageRoute(
-            builder: (_) => const SecondRegistrationScreen());
+        return MaterialPageRoute(builder: (_) => SecondRegistrationScreen());
       case "/home_screen":
-        return MaterialPageRoute(
-            builder: (_) => const SecondRegistrationScreen());
+        return MaterialPageRoute(builder: (_) => HomeScreen());
 
 //firebase_auth
       default:
