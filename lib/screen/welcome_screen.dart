@@ -108,7 +108,10 @@ class WelcomeScreen extends StatelessWidget {
                                     side: const BorderSide(
                                         color: GetColor.PrimaryColor)))),
                         // ignore: avoid_returning_null_for_void
-                        onPressed: () => {},
+                        onPressed: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, "/home_screen", (route) => false);
+                        },
                         child: Text("Login".toUpperCase(),
                             style: const TextStyle(fontFamily: "inter"))),
                   ),

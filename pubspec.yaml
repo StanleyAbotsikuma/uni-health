@@ -37,6 +37,7 @@ dependencies:
   google_fonts: ^3.0.1
   image_fade: ^0.6.1
   gap: ^2.0.0
+  dio: ^4.0.6
   # loader_overlay: ^2.0.10
 
   flutter:

@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:uni_health/utils/registration_provider.dart';
 
 import '../configs/colors.dart';
+import '../utils/utils.dart';
 
 class CompleteRegistrationScreen extends StatefulWidget {
   const CompleteRegistrationScreen({Key? key}) : super(key: key);
@@ -164,8 +168,59 @@ class _CompleteRegistrationScreenState
                                       userPassword: userPassword.text);
                                   if (registrationProvider.getCompleteStep3() &&
                                       registrationProvider.getCompleteStep2() &&
-                                      registrationProvider
-                                          .getCompleteStep1()) {}
+                                      registrationProvider.getCompleteStep1()) {
+                                    Future<void> Signup() async {
+                                      Map data = {
+                                        "token": Constants.token,
+                                        "password": Constants.password,
+                                        "type": Constants.register,
+                                        "userFirstName": registrationProvider
+                                            .getUserFirstName(),
+                                        "userLastName": registrationProvider
+                                            .getUserLastName(),
+                                        "userPhone":
+                                            registrationProvider.getUserPhone(),
+                                        "userEmail":
+                                            registrationProvider.getUserEmail(),
+                                        "userResidence": registrationProvider
+                                            .getUserResidence(),
+                                        "userCloseFirstName":
+                                            registrationProvider
+                                                .getUserCloseFirstName(),
+                                        "userCloseLastName":
+                                            registrationProvider
+                                                .getUserCloseLastName(),
+                                        "userClosePhone":
+                                            registrationProvider.getUserPhone(),
+                                        "userPassword": registrationProvider
+                                            .getUserPassword()
+                                      };
+                                      Response response;
+                                      var dio = Dio();
+                                      // print(data);
+                                      response = await dio.post(Constants.url,
+                                          data: data);
+
+                                      if (kDebugMode) {
+                                        print(response.data);
+                                      }
+
+                                      final payload = response.data;
+                                      // /print(payload["message"]);
+                                      if (payload["message"] == "success") {
+                                        // ignore: use_build_context_synchronously
+                                        SignIn();
+                                        Navigator.pushNamedAndRemoveUntil(
+                                            context,
+                                            "/home_screen",
+                                            (route) => false);
+                                      } else {}
+                                    }
+
+                                    Signup();
+                                    //signup function
+
+                                  }
                                 }
                               }
                             },
@@ -199,4 +254,6 @@ class _CompleteRegistrationScreenState
       ),
     );
   }
+
+  void SignIn() {}
 }

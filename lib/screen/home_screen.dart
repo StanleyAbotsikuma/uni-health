@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/local_Authenication.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -8,6 +10,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    authFunction();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold();

@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.trevillon.uni_health">
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+
    <application
         android:label="Uni-Health"
         android:name="${applicationName}"
