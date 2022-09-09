@@ -1,11 +1,46 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Sharepreference {
-  factory Sharepreference() {
-    return SharedPreferences.getInstance();
+  Sharepreference._privateConstructor();
+  static final Sharepreference instance = Sharepreference._privateConstructor();
+
+  setIntValue(String key, int value) async {
+    SharedPreferences myPrefs = await SharedPreferences.getInstance();
+    myPrefs.setInt(key, value);
   }
 
-  static Sharepreference _instance = Sharepreference._();
+  Future<Object> getIntValue(String key) async {
+    SharedPreferences myPrefs = await SharedPreferences.getInstance();
+    return myPrefs.getInt(key) ?? "";
+  }
 
-  Sharepreference._();
+  setStringValue(String key, String value) async {
+    SharedPreferences myPrefs = await SharedPreferences.getInstance();
+    myPrefs.setString(key, value);
+  }
+
+  Future<String> getStringValue(String key) async {
+    SharedPreferences myPrefs = await SharedPreferences.getInstance();
+    return myPrefs.getString(key) ?? "";
+  }
+
+  Future<bool> containsKey(String key) async {
+    SharedPreferences myPrefs = await SharedPreferences.getInstance();
+    return myPrefs.containsKey(key);
+  }
+
+  setBooleanValue(String key, bool value) async {
+    SharedPreferences myPrefs = await SharedPreferences.getInstance();
+    myPrefs.setBool(key, value);
+  }
+
+  Future<bool> getBooleanValue(String key) async {
+    SharedPreferences myPrefs = await SharedPreferences.getInstance();
+    return myPrefs.getBool(key) ?? false;
+  }
+
+  removeAll() async {
+    SharedPreferences myPrefs = await SharedPreferences.getInstance();
+    return myPrefs.clear();
+  }
 }
