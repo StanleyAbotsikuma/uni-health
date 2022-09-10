@@ -15,6 +15,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool overlay = false;
+  final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
+
   @override
   void initState() {
     authFunction();
@@ -24,11 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(0, 0, 0, 0),
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            _key.currentState!.openDrawer();
+          },
           icon: Icon(
             Icons.menu,
             size: 30.sp,
@@ -44,7 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, "/profile_screen");
+            },
             icon: Icon(
               Icons.person,
               size: 30.sp,
@@ -53,6 +60,39 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       extendBodyBehindAppBar: true,
+      drawer: Drawer(
+        child: Column(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: GetColor.PrimaryColor,
+              ), //BoxDecoration
+              child: UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: GetColor.PrimaryColor,
+                ),
+                accountName: Text(
+                  "Stanley AbotsiKuma",
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+                accountEmail: Text("PA-201256565"),
+                currentAccountPictureSize: Size.square(50),
+                currentAccountPicture: CircleAvatar(
+                  backgroundColor: GetColor.PrimaryColor,
+                  child: Text(
+                    "S",
+                    style: TextStyle(fontSize: 30.0, color: Colors.blue),
+                  ), //Text
+                ), //circleAvatar
+              ), //UserAccountDrawerHeader
+            ), //DrawerHeader
+            menu1(context),
+            menu2(context),
+          ],
+        ),
+      ),
       body: Stack(children: [
         overlay
             ? Container(
@@ -196,7 +236,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                       mainAxisSpacing: 10.h,
                                       crossAxisSpacing: 10.w),
                               children: [
-                                home_button(),
+                                homeButton("consultation", "Medical Records"),
+                                homeButton("robot", "Dr."),
+                                homeButton("doctor", "Book Appointment"),
+                                homeButton("capsules", "Medications"),
+                                homeButton("sticky-note",
+                                    "Tips from Health Personels"),
+                                homeButton("health-check", "FeedBacks"),
                               ]),
                         ),
                       ],
@@ -211,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget home_button() {
+  Widget homeButton(icon, title) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         elevation: 0,
@@ -225,21 +271,97 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       // ignore: avoid_returning_null_for_void
       onPressed: () {},
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Image.asset(
-            GetImages.white,
-            width: 80.w,
-            height: 80.w,
-          ),
-          const Text(
-            "Book Appoint",
-            style: TextStyle(fontFamily: "inter"),
-          )
-        ],
+      child: Container(
+        padding: EdgeInsets.all(10.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Image.asset(
+              // ignore: prefer_interpolation_to_compose_strings
+              "assets/images/icons/" + icon + ".png",
+              width: 50.w,
+              height: 50.w,
+            ),
+            Text(
+              title,
+              style: TextStyle(
+                  fontFamily: "inter",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.sp),
+            )
+          ],
+        ),
       ),
     );
   }
+
+  menu1(BuildContext context) {
+    return Expanded(
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            button(
+                context,
+                const Icon(
+                  Icons.person,
+                  color: Colors.black,
+                ),
+                Colors.transparent,
+                "Profile",
+                Colors.black)
+          ]),
+    );
+  }
+}
+
+Widget menu2(context) {
+  return Expanded(
+    child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          button(
+              context,
+              const Icon(
+                Icons.power_settings_new_outlined,
+              ),
+              Colors.red,
+              "Sign Out",
+              Colors.white),
+        ]),
+  );
+}
+
+Widget button(context, Icon i_con, Color color, String title, Color textColor) {
+  return SizedBox(
+    width: double.infinity,
+    height: 50.h,
+    child: ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        primary: color, //background color of button
+
+        shape: RoundedRectangleBorder(
+            //to set border radius to button
+            borderRadius: BorderRadius.circular(0)),
+        //elevation of button
+
+        //  padding: EdgeInsets.all(20) //content padding inside button
+      ),
+      // ignore: avoid_returning_null_for_void
+      onPressed: () {},
+      child: Row(children: [
+        Gap(20.w),
+        i_con,
+        Gap(8.w),
+        Text(
+          title,
+          style:
+              TextStyle(color: textColor, fontFamily: "inter", fontSize: 16.sp),
+        )
+      ]),
+    ),
+  );
 }

@@ -15,6 +15,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   bool _visible = false;
+  bool _signin = false;
   @override
   void initState() {
     super.initState();
@@ -27,8 +28,11 @@ class _SplashScreenState extends State<SplashScreen> {
       setState(() {
         _visible = false;
       });
-      Navigator.pushNamedAndRemoveUntil(
-          context, "/welcome_screen", (route) => false);
+      _signin
+          ? Navigator.pushNamedAndRemoveUntil(
+              context, "/home_screen", (route) => false)
+          : Navigator.pushNamedAndRemoveUntil(
+              context, "/welcome_screen", (route) => false);
     });
   }
 

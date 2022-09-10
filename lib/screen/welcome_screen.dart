@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -6,8 +5,16 @@ import 'package:gap/gap.dart';
 import '../configs/colors.dart';
 import '../configs/images.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  TextEditingController userEmail = TextEditingController();
+  TextEditingController userPassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +73,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   const Gap(40),
                   TextField(
+                    controller: userEmail,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.email),
@@ -79,6 +87,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   const Gap(10),
                   TextField(
+                    controller: userPassword,
                     keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
                     decoration: InputDecoration(
@@ -97,20 +106,27 @@ class WelcomeScreen extends StatelessWidget {
                     height: 70.h,
                     child: ElevatedButton(
                         style: ButtonStyle(
-                            foregroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                                GetColor.PrimaryColor),
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                    side: const BorderSide(
-                                        color: GetColor.PrimaryColor)))),
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              GetColor.PrimaryColor),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              side: const BorderSide(
+                                  color: GetColor.PrimaryColor),
+                            ),
+                          ),
+                        ),
                         // ignore: avoid_returning_null_for_void
                         onPressed: () {
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, "/home_screen", (route) => false);
+                          if (userEmail.text.trim() == "") {
+                          } else if (userPassword.text.trim() == "") {
+                          } else {
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, "/home_screen", (route) => false);
+                          }
                         },
                         child: Text("Login".toUpperCase(),
                             style: const TextStyle(fontFamily: "inter"))),

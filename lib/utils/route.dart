@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uni_health/screen/complete_registration_screen.dart';
+import 'package:uni_health/screen/profile_screen.dart';
 import 'package:uni_health/screen/registration_screen.dart';
 import 'package:uni_health/screen/welcome_screen.dart';
 
@@ -26,6 +27,20 @@ class GenerateRoute {
         return MaterialPageRoute(builder: (_) => SecondRegistrationScreen());
       case "/home_screen":
         return MaterialPageRoute(builder: (_) => HomeScreen());
+      case "/profile_screen":
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
+      case "/appointment_screen":
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
+      case "/records_screen":
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
+      case "/medication_screen":
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
+      case "/doctor_screen":
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
+      case "/feedback_screen":
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
+      case "/tips_screen":
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
 
 //firebase_auth
       default:
