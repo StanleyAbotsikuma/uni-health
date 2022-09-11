@@ -4,9 +4,14 @@ import 'package:gap/gap.dart';
 
 import '../configs/colors.dart';
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+class MedicationScreen extends StatefulWidget {
+  const MedicationScreen({Key? key}) : super(key: key);
 
+  @override
+  State<MedicationScreen> createState() => _MedicationScreenState();
+}
+
+class _MedicationScreenState extends State<MedicationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        title: const Text("Profile"),
+        title: const Text("Medication"),
         actions: [],
       ),
       extendBodyBehindAppBar: true,

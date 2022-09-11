@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:uni_health/screen/appointment_screen.dart';
 import 'package:uni_health/screen/complete_registration_screen.dart';
+import 'package:uni_health/screen/doctor_screen.dart';
+import 'package:uni_health/screen/feedback_screen.dart';
+import 'package:uni_health/screen/medication_screen.dart';
 import 'package:uni_health/screen/profile_screen.dart';
+import 'package:uni_health/screen/records_screen.dart';
 import 'package:uni_health/screen/registration_screen.dart';
+import 'package:uni_health/screen/tips_screen.dart';
 import 'package:uni_health/screen/welcome_screen.dart';
 
 import '../screen/home_screen.dart';
@@ -30,17 +36,17 @@ class GenerateRoute {
       case "/profile_screen":
         return MaterialPageRoute(builder: (_) => ProfileScreen());
       case "/appointment_screen":
-        return MaterialPageRoute(builder: (_) => ProfileScreen());
+        return MaterialPageRoute(builder: (_) => AppointmentScreen());
       case "/records_screen":
-        return MaterialPageRoute(builder: (_) => ProfileScreen());
+        return MaterialPageRoute(builder: (_) => RecordScreen());
       case "/medication_screen":
-        return MaterialPageRoute(builder: (_) => ProfileScreen());
+        return MaterialPageRoute(builder: (_) => MedicationScreen());
       case "/doctor_screen":
-        return MaterialPageRoute(builder: (_) => ProfileScreen());
+        return MaterialPageRoute(builder: (_) => DoctorScreen());
       case "/feedback_screen":
-        return MaterialPageRoute(builder: (_) => ProfileScreen());
+        return MaterialPageRoute(builder: (_) => FeedBackScreen());
       case "/tips_screen":
-        return MaterialPageRoute(builder: (_) => ProfileScreen());
+        return MaterialPageRoute(builder: (_) => TipsScreen());
 
 //firebase_auth
       default:

@@ -4,9 +4,14 @@ import 'package:gap/gap.dart';
 
 import '../configs/colors.dart';
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+class RecordScreen extends StatefulWidget {
+  const RecordScreen({Key? key}) : super(key: key);
 
+  @override
+  State<RecordScreen> createState() => _RecordScreenState();
+}
+
+class _RecordScreenState extends State<RecordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        title: const Text("Profile"),
+        title: const Text("Medical Records"),
         actions: [],
       ),
       extendBodyBehindAppBar: true,

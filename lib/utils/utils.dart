@@ -1,5 +1,5 @@
 class Constants {
-  static String url = "http://192.168.100.6/IoT/UG/webplatform/api/";
+  static String url = "http://192.168.162.186/IoT/UG/webplatform/api/";
   static String token = "giRGfB56pBShzNFfW3wCES748GxRxHb3TTNrxZVJd";
   static String password = "SrrheFCdvhrX2TKF3sAaTmv3ubguRFJnumQD4MMxW";
   static String diagnoses = "diagnoses";

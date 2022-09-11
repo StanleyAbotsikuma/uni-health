@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 
 import '../configs/colors.dart';
 import '../configs/images.dart';
+import 'components.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   TextEditingController userEmail = TextEditingController();
   TextEditingController userPassword = TextEditingController();
-
+  final GlobalKey<ScaffoldState> key = GlobalKey(); // Create a key
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,8 +125,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           if (userEmail.text.trim() == "") {
                           } else if (userPassword.text.trim() == "") {
                           } else {
-                            Navigator.pushNamedAndRemoveUntil(
-                                context, "/home_screen", (route) => false);
+                            SignIn(key, context, userEmail.text,
+                                userPassword.text);
                           }
                         },
                         child: Text("Login".toUpperCase(),

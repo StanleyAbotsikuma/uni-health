@@ -6,7 +6,7 @@ import '../configs/colors.dart';
 import '../configs/images.dart';
 
 class AppointmentScreen extends StatefulWidget {
-  const AppointmentScreen({Key? key}) : super(key: key);
+  AppointmentScreen({Key? key}) : super(key: key);
 
   @override
   State<AppointmentScreen> createState() => _AppointmentScreenState();
@@ -20,7 +20,9 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         backgroundColor: const Color.fromARGB(0, 0, 0, 0),
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: Icon(
             Icons.arrow_back,
             size: 30.sp,

@@ -3,10 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 import '../configs/colors.dart';
+import '../configs/images.dart';
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+class TipsScreen extends StatefulWidget {
+  const TipsScreen({Key? key}) : super(key: key);
 
+  @override
+  State<TipsScreen> createState() => _TipsScreenState();
+}
+
+class _TipsScreenState extends State<TipsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +29,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        title: const Text("Profile"),
+        title: const Text("Health Tips"),
         actions: [],
       ),
       extendBodyBehindAppBar: true,

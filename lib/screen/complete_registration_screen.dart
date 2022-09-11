@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:uni_health/utils/registration_provider.dart';
+import 'package:uni_health/utils/sharedpreference.dart';
 
 import '../configs/colors.dart';
 import '../utils/utils.dart';
+import 'components.dart';
 
 class CompleteRegistrationScreen extends StatefulWidget {
   const CompleteRegistrationScreen({Key? key}) : super(key: key);
@@ -23,6 +23,8 @@ class _CompleteRegistrationScreenState
     extends State<CompleteRegistrationScreen> {
   TextEditingController userPassword = TextEditingController();
   TextEditingController repeatPassword = TextEditingController();
+  final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
+
   String passwordStatus = "";
 
   void checkPassword() {
@@ -209,11 +211,14 @@ class _CompleteRegistrationScreenState
                                       // /print(payload["message"]);
                                       if (payload["message"] == "success") {
                                         // ignore: use_build_context_synchronously
-                                        SignIn();
-                                        Navigator.pushNamedAndRemoveUntil(
+                                        SignIn(
+                                            _key,
                                             context,
-                                            "/home_screen",
-                                            (route) => false);
+                                            registrationProvider.getUserEmail(),
+                                            registrationProvider
+                                                .getUserPassword());
+                                        // ignore: use_build_context_synchronously
+
                                       } else {}
                                     }
 
@@ -254,6 +259,4 @@ class _CompleteRegistrationScreenState
       ),
     );
   }
-
-  void SignIn() {}
 }

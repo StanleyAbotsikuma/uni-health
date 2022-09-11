@@ -3,10 +3,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 import '../configs/colors.dart';
+import '../configs/images.dart';
 
-class ProfileScreen extends StatelessWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+class DoctorScreen extends StatefulWidget {
+  const DoctorScreen({Key? key}) : super(key: key);
 
+  @override
+  State<DoctorScreen> createState() => _DoctorScreenState();
+}
+
+class _DoctorScreenState extends State<DoctorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +29,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-        title: const Text("Profile"),
+        title: const Text("Doctor Uni-Health"),
         actions: [],
       ),
       extendBodyBehindAppBar: true,

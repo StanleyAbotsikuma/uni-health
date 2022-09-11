@@ -236,13 +236,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                       mainAxisSpacing: 10.h,
                                       crossAxisSpacing: 10.w),
                               children: [
-                                homeButton("consultation", "Medical Records"),
-                                homeButton("robot", "Dr."),
-                                homeButton("doctor", "Book Appointment"),
-                                homeButton("capsules", "Medications"),
-                                homeButton("sticky-note",
-                                    "Tips from Health Personels"),
-                                homeButton("health-check", "FeedBacks"),
+                                homeButton("consultation", "Medical Records",
+                                    "/records_screen"),
+                                homeButton("robot", "Dr.", "/doctor_screen"),
+                                homeButton("doctor", "Book Appointment",
+                                    "/appointment_screen"),
+                                homeButton("capsules", "Medications",
+                                    "/medication_screen"),
+                                homeButton(
+                                    "sticky-note",
+                                    "Tips from Health Personels",
+                                    "/tips_screen"),
+                                homeButton("health-check", "FeedBacks",
+                                    "/feedback_screen"),
                               ]),
                         ),
                       ],
@@ -257,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget homeButton(icon, title) {
+  Widget homeButton(icon, title, routeName) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         elevation: 0,
@@ -270,7 +276,9 @@ class _HomeScreenState extends State<HomeScreen> {
         //  padding: EdgeInsets.all(20) //content padding inside button
       ),
       // ignore: avoid_returning_null_for_void
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamed(context, routeName);
+      },
       child: Container(
         padding: EdgeInsets.all(10.w),
         child: Column(
