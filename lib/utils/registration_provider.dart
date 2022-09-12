@@ -8,6 +8,8 @@ class RegistrationProvider with ChangeNotifier {
   String userEmail = "";
   bool completeStep1 = false;
 
+  String userId = "";
+
   String userResidence = "";
   String userCloseFirstName = "";
   String userCloseLastName = "";
@@ -50,6 +52,12 @@ class RegistrationProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void setUserID({
+    required String userId,
+  }) {
+    this.userId = userId;
+  }
+
   void clearAll() {
     userFirstName = "";
     userLastName = "";
@@ -62,6 +70,7 @@ class RegistrationProvider with ChangeNotifier {
     userClosePhone = "";
     completeStep2 = false;
     userPassword = "";
+    userId = "";
     completeStep3 = false;
   }
 
@@ -111,5 +120,9 @@ class RegistrationProvider with ChangeNotifier {
 
   bool getCompleteStep3() {
     return completeStep3;
+  }
+
+  String getUserId() {
+    return userId;
   }
 }

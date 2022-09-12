@@ -5,6 +5,8 @@ import 'package:uni_health/configs/colors.dart';
 
 import '../configs/images.dart';
 import '../utils/local_Authenication.dart';
+import '../utils/sharedpreference.dart';
+import '../utils/utils.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,13 +16,32 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String firstName = " ";
+  String lastName = " ";
+  String userId = " ";
+  String firstLetter = " ";
   bool overlay = false;
   final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
+
+  void load() async {
+    final fN =
+        await Sharepreference.instance.getStringValue(Constants.userFirstName);
+    final lN =
+        await Sharepreference.instance.getStringValue(Constants.userLastName);
+    final lS = await Sharepreference.instance.getStringValue(Constants.userId);
+    setState(() {
+      firstName = fN;
+      lastName = lN;
+      userId = lS;
+      firstLetter = firstName[0];
+    });
+  }
 
   @override
   void initState() {
     authFunction();
     super.initState();
+    load();
   }
 
   @override
@@ -63,33 +84,37 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: Drawer(
         child: Column(
           children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
+            DrawerHeader(
+              decoration: const BoxDecoration(
                 color: GetColor.PrimaryColor,
               ), //BoxDecoration
               child: UserAccountsDrawerHeader(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: GetColor.PrimaryColor,
                 ),
                 accountName: Text(
-                  "Stanley AbotsiKuma",
-                  style: TextStyle(
+                  "$firstName $lastName",
+                  style: const TextStyle(
                     fontSize: 18,
                   ),
                 ),
-                accountEmail: Text("PA-201256565"),
-                currentAccountPictureSize: Size.square(50),
+                accountEmail: Text(userId),
+                currentAccountPictureSize: const Size.square(50),
                 currentAccountPicture: CircleAvatar(
                   backgroundColor: GetColor.PrimaryColor,
                   child: Text(
-                    "S",
-                    style: TextStyle(fontSize: 30.0, color: Colors.blue),
+                    firstLetter,
+                    style: const TextStyle(fontSize: 30.0, color: Colors.blue),
                   ), //Text
                 ), //circleAvatar
               ), //UserAccountDrawerHeader
             ), //DrawerHeader
             menu1(context),
-            menu2(context),
+            menu2(context, () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, "/welcome_screen", (route) => false);
+              Sharepreference.instance.removeAll();
+            }),
           ],
         ),
       ),
@@ -136,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: EdgeInsets.only(left: 20.w, bottom: 20.w, top: 1.h),
                   child: Text(
-                    "Stanley",
+                    firstName,
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 25.sp,
@@ -267,12 +292,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         elevation: 0,
-        primary: GetColor.PrimaryColor, //background color of button
-
-        //elevation of button
-        shape: RoundedRectangleBorder(
-            //to set border radius to button
-            borderRadius: BorderRadius.circular(20.w)),
+        primary: GetColor.PrimaryColor,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.w)),
         //  padding: EdgeInsets.all(20) //content padding inside button
       ),
       // ignore: avoid_returning_null_for_void
@@ -318,31 +340,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Colors.transparent,
                 "Profile",
-                Colors.black)
+                Colors.black, () {
+              // print("object");
+            })
           ]),
     );
   }
 }
 
-Widget menu2(context) {
+Widget menu2(context, Function function) {
   return Expanded(
     child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          button(
-              context,
-              const Icon(
-                Icons.power_settings_new_outlined,
-              ),
-              Colors.red,
-              "Sign Out",
-              Colors.white),
+          button1(
+            context,
+            const Icon(
+              Icons.power_settings_new_outlined,
+            ),
+            Colors.red,
+            "Sign Out",
+            Colors.white,
+          ),
         ]),
   );
 }
 
-Widget button(context, Icon i_con, Color color, String title, Color textColor) {
+Widget button(context, Icon i_con, Color color, String title, Color textColor,
+    Function function) {
   return SizedBox(
     width: double.infinity,
     height: 50.h,
@@ -351,15 +377,42 @@ Widget button(context, Icon i_con, Color color, String title, Color textColor) {
         elevation: 0,
         primary: color, //background color of button
 
-        shape: RoundedRectangleBorder(
-            //to set border radius to button
-            borderRadius: BorderRadius.circular(0)),
-        //elevation of button
-
-        //  padding: EdgeInsets.all(20) //content padding inside button
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
       ),
-      // ignore: avoid_returning_null_for_void
-      onPressed: () {},
+      onPressed: () {
+        function();
+      },
+      child: Row(children: [
+        Gap(20.w),
+        i_con,
+        Gap(8.w),
+        Text(
+          title,
+          style:
+              TextStyle(color: textColor, fontFamily: "inter", fontSize: 16.sp),
+        )
+      ]),
+    ),
+  );
+}
+
+Widget button1(
+    context, Icon i_con, Color color, String title, Color textColor) {
+  return SizedBox(
+    width: double.infinity,
+    height: 50.h,
+    child: ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        primary: color, //background color of button
+
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+      ),
+      onPressed: () {
+        Navigator.pushNamedAndRemoveUntil(
+            context, "/welcome_screen", (route) => false);
+        Sharepreference.instance.removeAll();
+      },
       child: Row(children: [
         Gap(20.w),
         i_con,

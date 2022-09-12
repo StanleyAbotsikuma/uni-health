@@ -1,8 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Sharepreference {
-  Sharepreference._privateConstructor();
-  static final Sharepreference instance = Sharepreference._privateConstructor();
+  Sharepreference._();
+  static final Sharepreference instance = Sharepreference._();
 
   setIntValue(String key, int value) async {
     SharedPreferences myPrefs = await SharedPreferences.getInstance();
