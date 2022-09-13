@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../configs/colors.dart';
 import '../configs/images.dart';
+import '../utils/sharedpreference.dart';
+import '../utils/utils.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -15,9 +17,15 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   bool _visible = false;
+  bool _signin = false;
+  check() async {
+    _signin = await Sharepreference.instance.getBooleanValue(Constants.signIn);
+  }
+
   @override
   void initState() {
     super.initState();
+    check();
     Timer(const Duration(seconds: 1), () {
       setState(() {
         _visible = true;
@@ -27,8 +35,11 @@ class _SplashScreenState extends State<SplashScreen> {
       setState(() {
         _visible = false;
       });
-      Navigator.pushNamedAndRemoveUntil(
-          context, "/welcome_screen", (route) => false);
+      _signin
+          ? Navigator.pushNamedAndRemoveUntil(
+              context, "/home_screen", (route) => false)
+          : Navigator.pushNamedAndRemoveUntil(
+              context, "/welcome_screen", (route) => false);
     });
   }
 
